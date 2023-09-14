@@ -8,8 +8,8 @@ public class AppFaculdade {
         Semestre semestre = new Semestre();
 
         System.out.println("Informe as notas para cada avaliação:");
-        for (Prova avaliacao : semestre.getProvas()) {
-            avaliacao.setNotas(scanner);
+        for (Prova prova : semestre.getProvas()) {
+            prova.setNotas(scanner);
         }
 
         if (semestre.validarPesos()) {
