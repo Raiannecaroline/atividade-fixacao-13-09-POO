@@ -3,43 +3,38 @@ import java.util.List;
 
 public class Semestre {
 
-    private List<Prova> provas;
+    private Prova[] provas;
 
     public Semestre() {
-        provas = new ArrayList<>();
+        provas = new Prova[4];
+        provas[0] = new Prova("Prova", 2, 2);
+        provas[1] = new Prova("Trabalho", 1, 3);
+        provas[2] = new Prova("Interdisciplinar", 2, 3);
+        provas[3] = new Prova("Interdisciplinar (Peso 4)", 4, 1);
     }
 
-    public void adicionarAvaliacao(Prova prova) {
-        provas.add(prova);
+    public Prova[] getProvas() {
+        return provas;
     }
 
-    public boolean pesoValido() {
+    public boolean validarPesos() {
         double somaPesos = 0;
         for (Prova prova : provas) {
             somaPesos += prova.getPeso();
         }
-        return somaPesos == 7.0;
+        return somaPesos == 7;
     }
 
     public double calcularMedia() {
-        double media = 0;
-        for (Prova prova : provas) {
-            media += prova.calcularPontos();
+        double somaPontos = 0;
+        for (Prova avaliacao : provas) {
+            somaPontos += avaliacao.calcularPontos();
         }
-        return media;
+        return somaPontos / 7;
     }
 
     public String resultado() {
-        if (pesoValido()) {
-            double media = calcularMedia();
-            if (media >= 5.0) {
-                return "APROVADO";
-            } else {
-                return "REPROVADO";
-            }
-        } else {
-            return "Peso das avaliações inválido";
-        }
+        return calcularMedia() >= 5 ? "APROVADO" : "REPROVADO";
     }
 
 }
